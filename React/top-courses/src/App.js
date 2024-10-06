@@ -6,13 +6,15 @@ import {toast} from 'react-toastify'
 import {data,apiUrl} from './data';
 import { useState,useEffect } from "react";
 function App() {
+  const [category,setCategory]=useState("All");
   const [loading,setLoading]=useState(true);
   const [courses,setCourses]=useState(null);
   async function fetchData(){
     setLoading(true);
     try{
     const response=await fetch(apiUrl);
-    const output=response.json();
+    const output=await response.json();
+    setCourses(output.data);
     }catch(error){
       toast.error("API URL NOT WORKING")
     }
@@ -24,9 +26,9 @@ function App() {
   return (
     <div className="App">
       <Navbar/>
-      <Filter data={data}/>
+      <Filter data={data} setCategory={setCategory}/>
       {
-      loading?(<Spinner/>):(<Cards data={courses}/>)
+      loading?(<Spinner/>):(<Cards courses={courses} category={category}/>)
 }
     </div>
   );

@@ -1,9 +1,19 @@
 import React from 'react'
-
-const Card = () => {
+import {FcLike} from 'react-icons/fc'
+import './Card.css'
+const Card = ({course}) => {
   return (
     <div>
-      
+      <div className="img">
+        <img src={course.image.url}alt=""/>
+        </div>
+        <div className="like">
+          <FcLike/>
+        </div>
+        <div className="title">
+          <p>{course.title}</p>
+          <p>{course.description}</p>
+        </div>
     </div>
   )
 }
